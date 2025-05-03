@@ -1,4 +1,7 @@
-export let cart = [];
+export let cart = JSON.parse(localStorage.getItem("cart"));
+if (cart == null) {
+  cart = [];
+}
 export function addToCart(productId) {
   let itemMatch;
   const quantity = parseInt(
@@ -19,5 +22,11 @@ export function addToCart(productId) {
       productId,
       quantity,
     });
+    console.log(cart);
   }
+  saveToLocalStorage();
+}
+
+export function saveToLocalStorage() {
+  localStorage.setItem("cart", JSON.stringify(cart));
 }

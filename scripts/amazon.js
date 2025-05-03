@@ -1,5 +1,7 @@
 import { addToCart, cart } from "../data/cart.js";
 import { products } from "../data/products.js";
+import { formatCents } from "./utils/utils.js";
+
 let elements = "";
 
 products.forEach((product) => {
@@ -23,7 +25,7 @@ products.forEach((product) => {
         </div>
 
         <div class="product-price">
-          $${(product.priceCents / 100).toFixed(2)}
+          $${formatCents(product.priceCents)}
         </div>
 
         <div class="product-quantity-container">
@@ -84,6 +86,7 @@ document.querySelectorAll(".js-add-cart").forEach((button) => {
   const { productId } = button.dataset;
   button.addEventListener("click", () => {
     addToCart(productId);
+
     timeout = updateCart(timeout, productId, cartQuantity);
   });
 });
